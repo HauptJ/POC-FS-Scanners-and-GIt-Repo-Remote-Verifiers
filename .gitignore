@@ -36,6 +36,10 @@
 *.exe
 *.out
 *.app
+main
 
 # debug information files
 *.dwo
+
+.idea
+.idea/*
