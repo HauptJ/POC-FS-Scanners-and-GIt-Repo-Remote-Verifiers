@@ -5,11 +5,28 @@
 #include "gitrepoutil.cpp"
 #include "gtest/gtest.h"
 #include <string>
+#include <map>
 
 TEST(GitRepoUtilTest, TestIsGitRepositoryValid) {
-    std::string in_str = "/home/josh/dev/hauptj/POC-FS-Scanners-and-GIt-Repo-Remote-Verifiers/.git";
-    gitrepoutil gitutil = gitrepoutil(in_str);
-    EXPECT_TRUE(gitutil.getIsValidRemote());
+    try {
+        std::string in_str = "/home/josh/dev/hauptj/POC-FS-Scanners-and-GIt-Repo-Remote-Verifiers/.git";
+        gitrepoutil gitutil = gitrepoutil(in_str);
+        EXPECT_TRUE(gitutil.getIsValidRemote());
+        std::vector<std::map<std::string, std::string>> actualRemotes = gitutil.getRemotes();
+        EXPECT_EQ(actualRemotes.size(), 1);
+        for (const auto& remote : actualRemotes) {
+            for (const auto& [key, value] : remote) {
+                if (key == "origin") {
+                    EXPECT_TRUE(value.contains("github.com"));
+                } else {
+                    FAIL() << "Unexpected remote name found: " << key;
+                }
+            }
+        }
+} catch (std::runtime_error& e) {
+        printf("%s\n", e.what());
+        FAIL() << "Exception thrown during valid repository test.";
+    }
 }
 
 TEST(GitRepoUtilTest, TestIsGitRepositoryInValid) {
@@ -25,9 +42,4 @@ TEST(GitRepoUtilTest, TestIsGitRepositoryInValid) {
 TEST(GitRepoUtilTest, TestIsValidRemoteURL) {
     std::string in_remote_Url = "git@github.com:HauptJ/POC-FS-Scanners-and-GIt-Repo-Remote-Verifiers.git";
     EXPECT_TRUE(gitrepoutil::verifyRemoteURL(in_remote_Url));
-}
-
-int main(int argc, char** argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
 }

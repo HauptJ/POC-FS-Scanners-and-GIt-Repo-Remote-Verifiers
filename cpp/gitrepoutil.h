@@ -12,16 +12,17 @@
 class gitrepoutil {
 
     std::string repoPath;
-    std::vector<std::map<std::string, std::string>> remotes = {};
+    std::vector<std::map<std::string, std::string>> remotes = {}; // name, URL
     bool isValidRemote = NULL;
 
 public:
     gitrepoutil(std::string repoPath);
 
-    std::map<std::string, std::vector<std::string>> getRemotes() const;
+    std::vector<std::map<std::string, std::string>> getRemotes() const;
 
     static bool verifyRemoteURL(std::string remoteURL);
     bool getIsValidRemote() const;
+    std::string getRepoPath() const;
 
     ~gitrepoutil();
 };

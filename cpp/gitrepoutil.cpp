@@ -3,7 +3,7 @@
 //
 
 #include "gitrepoutil.h"
-
+#include <map>
 #include <vector>
 #include <git2.h>
 #include <stdexcept>
@@ -75,11 +75,19 @@ gitrepoutil::gitrepoutil(std::string repoPath) {
     }
 }
 
+std::vector<std::map<std::string, std::string>> gitrepoutil::getRemotes() const {
+    return this->remotes;
+}
+
 bool gitrepoutil::getIsValidRemote() const {
     if (this->isValidRemote == true || this->isValidRemote == false) {
         return this->isValidRemote;
     }
-    return this->isValidRemote;
+    throw std::runtime_error("isValidRemote has not been set.");
+}
+
+std::string gitrepoutil::getRepoPath() const {
+    return this->repoPath;
 }
 
 gitrepoutil::~gitrepoutil() {
