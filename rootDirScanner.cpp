@@ -4,7 +4,7 @@
 
 #include <filesystem>
 #include "rootDirScanner.h"
-#include "gitRepoUtil.cpp" // Comment out if compiling test case driver, allTests.cpp
+#include "gitRepoUtil.cpp" // Comment out to build test driver, allTests.cpp | uncomment to build main driver main.cpp
 #include <map>
 #include <string>
 

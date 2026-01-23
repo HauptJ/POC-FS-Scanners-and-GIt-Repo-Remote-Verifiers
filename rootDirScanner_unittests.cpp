@@ -6,6 +6,7 @@
 #include "gtest/gtest.h"
 #include <string>
 #include <vector>
+#include <filesystem>
 
 TEST(fsscannertest, isSourceCodeFile) {
     std::vector<std::string> validSourceCodeFilePathsIn = {
@@ -33,13 +34,15 @@ TEST(fsscannertest, expectedScanResult) {
     try {
         std::string testRootDir = "/home/josh/dev";
 
+        std::string actualCurrWorkingDir = std::filesystem::current_path().string();
+
         std::vector<std::string> expectedSourceCodeFiles = {
-            "/home/josh/dev/hauptj/POC-FS-Scanners-and-GIt-Repo-Remote-Verifiers/cpp/main.cpp",
-            "/home/josh/dev/hauptj/POC-FS-Scanners-and-GIt-Repo-Remote-Verifiers/cpp/allTests.cpp"
+            actualCurrWorkingDir + "/main.cpp",
+            actualCurrWorkingDir + "/allTests.cpp"
         };
 
-        std::string expectedValidGitRepoPath = "/home/josh/dev/hauptj/POC-FS-Scanners-and-GIt-Repo-Remote-Verifiers/.git";
-        std::string expectedInvalidGitRepoPath = "/home/josh/dev/gl/hauptj/k8s-stack/.git";
+        std::string expectedValidGitRepoPath = actualCurrWorkingDir + "/.git";
+        std::string expectedInvalidGitRepoPath = "/home/josh/dev/gl/hauptj/k8s-stack/.git"; // replace with your own path
         std::string expectedValidRemoteUrl = "github.com";
         std::string expectedInvalidRemoteUrl = "gitlab.com";
         /*std::map<<std::string, std::vector<std::string>> expectedValidRemotes = {

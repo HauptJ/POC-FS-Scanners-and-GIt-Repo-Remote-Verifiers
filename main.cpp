@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <stdexcept>
 #include <string>
-//#include "gitRepoUtil.cpp" // Uncomment if compiling allTests.cpp
 #include "rootDirScanner.cpp"
 
 int main(int argc, char* argv[]) {
