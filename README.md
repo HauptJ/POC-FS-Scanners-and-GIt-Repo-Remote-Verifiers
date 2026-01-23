@@ -1,8 +1,8 @@
-# File System and Git Repository Remote URL Verifier
+# Recursive Root Directory Scanner and Git Repository Remote URL Verifier
 Proof of concept recursive file system scanner and Git repository config remote URL verifier using libgit2
 
 ## Overview
-This project is a proof of concept (POC) tool that scans a file system recursively to identify Git repositories and verifies their remote URLs using the libgit2 library. The tool is designed to help developers and system administrators ensure that their Git repositories are correctly configured with valid remote URLs.
+This project is a proof-of-concept (POC) tool that recursively scans a file system to identify Git repositories and verifies their remote URLs using the libgit2 library. The tool is designed to help developers and system administrators ensure that their Git repositories are correctly configured with valid remote URLs.
 
 ## Features
 - Recursive scanning of directories to locate Git repositories.
@@ -15,9 +15,9 @@ This project is a proof of concept (POC) tool that scans a file system recursive
 - C++ compiler (e.g., GCC, Clang) with C++23 support
 - CMake (version 4.1 or higher)
 - libgit2 library (version 1.5.0 or higher)
-- Git installed on the system
+- Git is installed on the system
 
-## Instruictions to Build and Run
+## Instructions to Build and Run
 1. Clone the repository:
 2. build main.cpp with libgit2
    ```bash
