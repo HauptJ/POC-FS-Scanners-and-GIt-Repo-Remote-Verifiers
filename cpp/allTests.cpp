@@ -3,8 +3,8 @@
 //
 
 #include "gtest/gtest.h"
-#include "gitrepoutil_unittests.cpp"
-#include "fsscanner_unittests.cpp"
+#include "gitRepoUtil_unittests.cpp"
+#include "rootDirScanner_unittests.cpp"
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);

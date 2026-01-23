@@ -2,7 +2,7 @@
 // Created by josh on 1/21/26.
 //
 
-#include "fsscanner.cpp"
+#include "rootDirScanner.cpp"
 #include "gtest/gtest.h"
 #include <string>
 #include <vector>
@@ -21,11 +21,11 @@ TEST(fsscannertest, isSourceCodeFile) {
     };
 
     for (const auto& filePath : validSourceCodeFilePathsIn) {
-        EXPECT_TRUE(fsscanner::isSourceCodeFile(filePath)) << "Failed for valid source code file: " << filePath;
+        EXPECT_TRUE(rootDirScanner::isSourceCodeFile(filePath)) << "Failed for valid source code file: " << filePath;
     }
 
     for (const auto& filePath : invalidSourceCodeFilePathsIn) {
-        EXPECT_FALSE(fsscanner::isSourceCodeFile(filePath)) << "Failed for invalid source code file: " << filePath;
+        EXPECT_FALSE(rootDirScanner::isSourceCodeFile(filePath)) << "Failed for invalid source code file: " << filePath;
     }
 }
 
@@ -49,7 +49,7 @@ TEST(fsscannertest, expectedScanResult) {
             {expectedInvalidGitRepoPath, {expectedInvalidRemoteUrl}}
         };*/
 
-        fsscanner scanner(testRootDir);
+        rootDirScanner scanner(testRootDir);
         std::vector<std::string> actualSourceCodeFiles = scanner.getSourceCodeFiles();
         EXPECT_GT(actualSourceCodeFiles.size(), 0);
         std::vector<std::map<std::string, std::string>> actualValidRemotes = scanner.getValidRemotes();

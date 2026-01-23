@@ -9,14 +9,14 @@
 #include <vector>
 #include <map>
 
-class gitrepoutil {
+class gitRepoUtil {
 
     std::string repoPath;
     std::vector<std::map<std::string, std::string>> remotes = {}; // name, URL
     bool isValidRemote = NULL;
 
 public:
-    gitrepoutil(std::string repoPath);
+    gitRepoUtil(std::string repoPath);
 
     std::vector<std::map<std::string, std::string>> getRemotes() const;
 
@@ -24,7 +24,7 @@ public:
     bool getIsValidRemote() const;
     std::string getRepoPath() const;
 
-    ~gitrepoutil();
+    ~gitRepoUtil();
 };
 
 

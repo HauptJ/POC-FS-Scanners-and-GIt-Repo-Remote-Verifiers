@@ -3,12 +3,12 @@
 //
 
 #include <filesystem>
-#include "fsscanner.h"
-#include "gitrepoutil.cpp"
+#include "rootDirScanner.h"
+#include "gitRepoUtil.cpp" // Comment out if compiling test case driver, allTests.cpp
 #include <map>
 #include <string>
 
-bool fsscanner::isSourceCodeFile(const std::string &filePath) {
+bool rootDirScanner::isSourceCodeFile(const std::string &filePath) {
     if (filePath.empty()) {
         return false;
     }
@@ -25,7 +25,7 @@ bool fsscanner::isSourceCodeFile(const std::string &filePath) {
     return false;
 }
 
-fsscanner::fsscanner(std::string rootPath) {
+rootDirScanner::rootDirScanner(std::string rootPath) {
     //printf("Starting scanner\n");
     this->rootPath = rootPath;
     for (const auto &entry: std::filesystem::recursive_directory_iterator(rootPath)) {
@@ -40,7 +40,7 @@ fsscanner::fsscanner(std::string rootPath) {
         if (entry.is_directory() && entry.path().filename() == ".git") {
             std::string repoPath = entry.path().string();
             //printf("Checking git repo: %s\n", repoPath.c_str());
-            gitrepoutil gitUtil(repoPath);
+            gitRepoUtil gitUtil(repoPath);
             std::vector<std::map<std::string, std::string>> remotes = gitUtil.getRemotes();
             for (const auto &remote : remotes) {
                 for (const auto& [key, value] : remote) {
@@ -58,18 +58,22 @@ fsscanner::fsscanner(std::string rootPath) {
     //printf("Scanning finished\n");
 }
 
-std::vector<std::string> fsscanner::getSourceCodeFiles() const {
+std::vector<std::string> rootDirScanner::getSourceCodeFiles() const {
     return this->sourceCodeFiles;
 }
 
-std::vector<std::map<std::string, std::string>> fsscanner::getValidRemotes() const {
+std::vector<std::map<std::string, std::string>> rootDirScanner::getValidRemotes() const {
     return this->validRemotes;
 }
 
-std::vector<std::map<std::string, std::string>> fsscanner::getInvalidRemotes() const {
+std::vector<std::map<std::string, std::string>> rootDirScanner::getInvalidRemotes() const {
     return this->invalidRemotes;
 }
 
-fsscanner::~fsscanner() {
+std::string rootDirScanner::getRootPath() const {
+    return this->rootPath;
+}
+
+rootDirScanner::~rootDirScanner() {
 
 }
