@@ -2,21 +2,21 @@
 // Created by josh on 1/21/26.
 //
 
-#include "gitrepoutil.h"
-
+#include "gitRepoUtil.h"
+#include <map>
 #include <vector>
 #include <git2.h>
 #include <stdexcept>
 #include <string>
 
-bool gitrepoutil::verifyRemoteURL(const std::string remoteURL) {
+bool gitRepoUtil::verifyRemoteURL(const std::string remoteURL) {
     if (!remoteURL.empty() && remoteURL.contains("github.com")) {
         return true;
     }
     return false;
 }
 
-gitrepoutil::gitrepoutil(std::string repoPath) {
+gitRepoUtil::gitRepoUtil(std::string repoPath) {
     this->repoPath = repoPath;
 
     try {
@@ -75,13 +75,21 @@ gitrepoutil::gitrepoutil(std::string repoPath) {
     }
 }
 
-bool gitrepoutil::getIsValidRemote() const {
+std::vector<std::map<std::string, std::string>> gitRepoUtil::getRemotes() const {
+    return this->remotes;
+}
+
+bool gitRepoUtil::getIsValidRemote() const {
     if (this->isValidRemote == true || this->isValidRemote == false) {
         return this->isValidRemote;
     }
-    return this->isValidRemote;
+    throw std::runtime_error("isValidRemote has not been set.");
 }
 
-gitrepoutil::~gitrepoutil() {
+std::string gitRepoUtil::getRepoPath() const {
+    return this->repoPath;
+}
+
+gitRepoUtil::~gitRepoUtil() {
 
 }
