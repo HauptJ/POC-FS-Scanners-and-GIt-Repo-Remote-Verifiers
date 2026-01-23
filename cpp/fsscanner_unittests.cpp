@@ -12,7 +12,6 @@ TEST(fsscannertest, isSourceCodeFile) {
         "/home/josh/example.c",
         "/home/josh/project/src/main.cpp",
         "/home/josh/scripts/script.py"
-
     };
 
     std::vector<std::string> invalidSourceCodeFilePathsIn = {
