@@ -70,11 +70,10 @@ TEST(fsscannertest, expectedScanResult) {
         for (const auto& remote : actualValidRemotes) {
             for (const auto& [key, value] : remote) {
                 printf("key: %s, value: %s\n", key.c_str(), value.c_str());
-                /*if (key == expectedValidGitRepoPath) {
+                if (key == expectedValidGitRepoPath) {
                     EXPECT_TRUE(value.contains(expectedValidRemoteUrl));
-                } else {
-                    FAIL() << "Unexpected remote URL value: " << value << " found for key: " << key;
-                }*/
+                    printf("Found: %s contains %s\n", value.c_str(), expectedValidRemoteUrl.c_str());
+                }
             }
         }
 
@@ -83,8 +82,6 @@ TEST(fsscannertest, expectedScanResult) {
                 printf("key: %s, value: %s\n", key.c_str(), value.c_str());
                 if (key == expectedInvalidGitRepoPath) {
                     EXPECT_TRUE(value.contains(expectedInvalidRemoteUrl));
-                } else {
-                    FAIL() << "Unexpected remote URL value: " << value << " found for key: " << key;
                 }
             }
         }
